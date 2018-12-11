@@ -168,11 +168,11 @@ public class Cluster {
         //System.out.println("cluster size: " + args[1]);
 
         //TODO: uncomment for final submission
-        Cluster cluster = new Cluster(42, args[0]);
-        cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
+        //Cluster cluster = new Cluster(42, args[0]);
+        //cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
 
-        //Cluster cluster = new Cluster(42, "data/congress_train.csv");
-        //cluster.AgglomerativeAlgorithm(10);
+        Cluster cluster = new Cluster(42, "data/congress_test.csv");
+        cluster.AgglomerativeAlgorithm(6);
 
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
 
