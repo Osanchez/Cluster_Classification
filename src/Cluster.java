@@ -164,10 +164,10 @@ public class Cluster {
     }
 
     public static void main(String args[]) throws IOException {
-        //TODO: uncomment for final submission
         //System.out.println("directory: " + args[0]);
         //System.out.println("cluster size: " + args[1]);
 
+        //TODO: uncomment for final submission
         Cluster cluster = new Cluster(42, args[0]);
         cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
 
