@@ -171,6 +171,9 @@ public class Cluster {
         Cluster cluster = new Cluster(42, "data/congress_train.csv");
         cluster.AgglomerativeAlgorithm(19);
 
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+
+        //sort the clusters by values within them and then add to a new list that will hold all the clusters
         for(HashMap.Entry<Integer, HashMap<Integer, ArrayList<String>>> entry: cluster.clusters.entrySet()) {
 
             HashMap<Integer, ArrayList<String>> congress_in_cluster = entry.getValue();
@@ -181,7 +184,15 @@ public class Cluster {
                 sort.add(congress_member.getKey());
             }
             Collections.sort(sort);
-            System.out.println(sort);
+            result.add(sort);
+        }
+
+        //now sort the final list of clusters and print in the proper format
+        result.sort(Comparator.comparing(l -> l.get(0)));
+
+        for(ArrayList<Integer> cluster_result: result) {
+            //TODO: print it as plain text and not a list
+            System.out.println(cluster_result);
         }
     }
 }
