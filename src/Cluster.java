@@ -1,6 +1,8 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.Math;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class Cluster {
@@ -172,6 +174,7 @@ public class Cluster {
         //cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
 
         Cluster cluster = new Cluster(42, "data/congress_test.csv");
+        final long startTime = System.currentTimeMillis(); //time starts at the beginning of the the algorithm
         cluster.AgglomerativeAlgorithm(6);
 
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
@@ -196,5 +199,11 @@ public class Cluster {
         for(ArrayList<Integer> cluster_result: result) {
             System.out.println(cluster_result.toString().replace("[", "").replace("]", ""));
         }
+        final long endTime = System.currentTimeMillis(); // time stops after result is printed
+
+
+        NumberFormat formatter = new DecimalFormat("#0.00000");
+        System.out.println();
+        System.out.print("Execution time is " + formatter.format((endTime - startTime) / 1000d) + " seconds");
     }
 }
