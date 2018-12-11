@@ -169,7 +169,7 @@ public class Cluster {
         //cluster.AgglomerativeAlgorithm(Integer.parseInt(args[2]));
 
         Cluster cluster = new Cluster(42, "data/congress_train.csv");
-        cluster.AgglomerativeAlgorithm(19);
+        cluster.AgglomerativeAlgorithm(10);
 
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
 
@@ -192,7 +192,7 @@ public class Cluster {
 
         for(ArrayList<Integer> cluster_result: result) {
             //TODO: print it as plain text and not a list
-            System.out.println(cluster_result);
+            System.out.println(cluster_result.toString().replace("[", "").replace("]", ""));
         }
     }
 }
