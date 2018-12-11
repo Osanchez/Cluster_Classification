@@ -130,17 +130,21 @@ public class Cluster {
     private double JaccardDistance(ArrayList<String> A, ArrayList<String> B) {
         //deceleration of variables we will be using
         double distance;
-        double A_union_B_value = 0.00;
-        double A_intersect_B_Value = number_of_bills; //Believe this value is always equal to the number of bills
+        double A_intersect_B_value = 0.00;
+        double A_union_B_Value; //Believe this value is always equal to the number of bills
 
         // counts the number of members that are shared between both sets.
         for(int x = 0; x < number_of_bills; x++) {
             if(A.get(x).equals(B.get(x))) {
-                A_union_B_value ++;
+                A_intersect_B_value ++;
             }
         }
+
+        //calculates the union
+        A_union_B_Value = (A.size()+ B.size()) - A_intersect_B_value; //setting this equal to the number of bills works too
+
         //final Jaccard index calculation
-        distance = 1 - (Math.abs(A_union_B_value)/Math.abs(A_intersect_B_Value));
+        distance = 1 - (Math.abs(A_intersect_B_value)/Math.abs(A_union_B_Value));
 
         return distance;
     }
@@ -173,7 +177,7 @@ public class Cluster {
         //Cluster cluster = new Cluster(42, args[0]);
         //cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
 
-        Cluster cluster = new Cluster(42, "data/congress_test.csv");
+        Cluster cluster = new Cluster(42, "data/congress_train.csv");
         final long startTime = System.currentTimeMillis(); //time starts at the beginning of the the algorithm
         cluster.AgglomerativeAlgorithm(6);
 
