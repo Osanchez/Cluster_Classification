@@ -165,11 +165,14 @@ public class Cluster {
 
     public static void main(String args[]) throws IOException {
         //TODO: uncomment for final submission
-        //Cluster cluster = new Cluster(42, args[1]);
-        //cluster.AgglomerativeAlgorithm(Integer.parseInt(args[2]));
+        //System.out.println("directory: " + args[0]);
+        //System.out.println("cluster size: " + args[1]);
 
-        Cluster cluster = new Cluster(42, "data/congress_train.csv");
-        cluster.AgglomerativeAlgorithm(10);
+        Cluster cluster = new Cluster(42, args[0]);
+        cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
+
+        //Cluster cluster = new Cluster(42, "data/congress_train.csv");
+        //cluster.AgglomerativeAlgorithm(10);
 
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
 
@@ -191,7 +194,6 @@ public class Cluster {
         result.sort(Comparator.comparing(l -> l.get(0)));
 
         for(ArrayList<Integer> cluster_result: result) {
-            //TODO: print it as plain text and not a list
             System.out.println(cluster_result.toString().replace("[", "").replace("]", ""));
         }
     }
