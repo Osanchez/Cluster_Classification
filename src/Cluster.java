@@ -1,8 +1,6 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.Math;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.*;
 
 public class Cluster {
@@ -46,11 +44,6 @@ public class Cluster {
                 throw sc.ioException();
             }
         }
-
-        //debugging
-        //for(HashMap.Entry entry: clusters.entrySet()) {
-        //    System.out.println(entry);
-        //}
     }
 
     private void AgglomerativeAlgorithm(int cluster_size) {
@@ -114,19 +107,7 @@ public class Cluster {
         return averageLink;
     }
 
-    /*
-     Jaccard Index = J(X,Y) = |X∩Y| / |X∪Y| = (the number in both sets)/(the number in either set)*100
-
-     1) Count the number of members which are shared between both sets.
-     2) Count the total number of members in both sets (shared and un-shared).
-     3) Divide the number of shared members (1) by the total number of members (2).
-     4) Multiply the number you found in (3) by 100.
-
-     Example:
-         A = {0,1,2,5,6}
-         B = {0,2,3,4,5,7,9}
-         Solution: J(A,B) = |A∩B| / |A∪B| = |{0,2,5}| / |{0,1,2,3,4,5,6,7,9}| = 3/9 = 0.33.
-  */
+    //Jaccard Index = J(X,Y) = |X∩Y| / |X∪Y| = (the number in both sets)/(the number in either set)*100
     private double JaccardDistance(ArrayList<String> A, ArrayList<String> B) {
         //deceleration of variables we will be using
         double distance;
@@ -141,7 +122,7 @@ public class Cluster {
         }
 
         //calculates the union
-        A_union_B_Value = (A.size()+ B.size()) - A_intersect_B_value; //setting this equal to the number of bills works too
+        A_union_B_Value = number_of_bills; //setting this equal to the number of bills works too
 
         //final Jaccard index calculation
         distance = 1 - (Math.abs(A_intersect_B_value)/Math.abs(A_union_B_Value));
@@ -170,16 +151,9 @@ public class Cluster {
     }
 
     public static void main(String args[]) throws IOException {
-        //System.out.println("directory: " + args[0]);
-        //System.out.println("cluster size: " + args[1]);
-
         //TODO: uncomment for final submission
-        //Cluster cluster = new Cluster(42, args[0]);
-        //cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
-
-        Cluster cluster = new Cluster(42, "data/congress_train.csv");
-        final long startTime = System.currentTimeMillis(); //time starts at the beginning of the the algorithm
-        cluster.AgglomerativeAlgorithm(6);
+        Cluster cluster = new Cluster(42, args[0]);
+        cluster.AgglomerativeAlgorithm(Integer.parseInt(args[1]));
 
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
 
@@ -203,11 +177,5 @@ public class Cluster {
         for(ArrayList<Integer> cluster_result: result) {
             System.out.println(cluster_result.toString().replace("[", "").replace("]", ""));
         }
-        final long endTime = System.currentTimeMillis(); // time stops after result is printed
-
-
-        NumberFormat formatter = new DecimalFormat("#0.00000");
-        System.out.println();
-        System.out.print("Execution time is " + formatter.format((endTime - startTime) / 1000d) + " seconds");
     }
 }
